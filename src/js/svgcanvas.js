@@ -5562,13 +5562,7 @@ const id = params.get('id');
 const token = localStorage.getItem('token');
 
 $.ajax({url: `/api/imageTemplate/${id}/svg`, dataType: 'text'}).then(svgData=>{
-  console.log(svgData);
-  this.importSvgString(svgData, true);
-  this.ungroupSelectedElement()
-  this.ungroupSelectedElement()
-  this.groupSelectedElements()
-  this.alignSelectedElements("m", "page")
-  this.alignSelectedElements("c", "page")
+  this.setSvgString(svgData);
 }).catch(()=>{
   console.log('Error loading image');
 })
