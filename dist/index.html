@@ -3,14 +3,14 @@
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
-  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <link rel="icon" type="image/png" href="/images/logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <title>Method Draw SVG Editor</title>
+  <title>Image Editor</title>
   <meta charset="utf-8">
   <meta name="description" content="Method Draw is an open source SVG editor for the web, you can use it online without signing up.">
 
-  <link rel="stylesheet" href="all.css?t=1596588684322">
+  <link rel="stylesheet" href="all.css?t=1599943091819">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 </div>
 
 <div id="menu_bar">
-  <a class="menu">
+  <!-- <a class="menu">
     <div class="menu_title" id="logo">
       <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
         <path d="M-.1 16.1L16 .04V16.1H-.1z" fill="#ccc"/>
@@ -50,15 +50,15 @@
       <div class="separator"></div>
       <div id="tool_about" class="menu_item">Keyboard Shortcuts...</div>
     </div>
-  </a>
+  </a> -->
   
   <div class="menu">
     <div class="menu_title">File</div>
     <div class="menu_list" id="file_menu"> 
-      <div id="tool_clear" class="menu_item">New Document</div>
       <div id="tool_open" class="menu_item" style="display: none;"><div id="fileinputs"></div>Open SVG...</div>
       <div id="tool_import" class="menu_item" style="display: none;"><div id="fileinputs_import"></div>Import Image...</div>
-      <div id="tool_save" class="menu_item">Save Image... <span class="shortcut">⌘S</span></div>
+      <div id="tool_save" class="menu_item">Save <span class="shortcut">⌘S</span></div>
+      <div id="tool_clear" class="menu_item">Clear</div>
       <div id="tool_export" class="menu_item">Export as PNG</div>
     </div>
   </div>
@@ -644,7 +644,7 @@
 </div>
 
 
-<script src="all.js?t=1596588684322"></script>
+<script src="all.js?t=1599943091819"></script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "method-draw",
+  "name": "simple-svg-editor",
   "version": "0.0.1",
   "description": "Method Draw is an SVG Editor for the web",
   "main": "index.js",
@@ -8,11 +8,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/methodofaction/Method-Draw.git"
+    "url": "git+https://github.com/mukti107/Method-Draw.git"
   },
   "keywords": [
     "SVG",

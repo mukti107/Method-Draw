@@ -12527,6 +12527,10 @@ this.open = function() {
   // Nothing by default, handled by optional widget/extension
 };
 
+this.init = function(){
+  console.log('init');
+}
+
 // Function: save
 // Serializes the current drawing into SVG XML text and returns it to the 'saved' handler.
 // This function also includes the XML prolog.  Clients of the SvgCanvas bind their save
@@ -12534,17 +12538,55 @@ this.open = function() {
 //
 // Returns: 
 // Nothing
+console.log(this);
+
+
+// this.loadFromURL(`/api/imageTemplate//svg`);
+//load image at first
+
+const url = new URL(window.location);
+const params = url.searchParams;
+const id = params.get('id');
+const token = localStorage.getItem('token');
+
+$.get(`/api/imageTemplate/${id}/svg`).then(r=>{
+  this.importSvgString('<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg"> <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ --> <g>  <title>background</title>  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>  </g> </g> <g>  <title>Layer 1</title>  <rect id="svg_1" height="77" width="400" y="57.5" x="99.5" stroke-width="1.5" stroke="#000" fill="#fff"/>  <rect id="svg_2" height="58" width="463" y="110.5" x="291.5" stroke-width="1.5" stroke="#000" fill="#fff"/>  <rect id="svg_3" height="142" width="390" y="252.45313" x="132.5" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#FFAAB8"/> </g></svg>', true);
+  this.ungroupSelectedElement()
+  this.ungroupSelectedElement()
+  this.groupSelectedElements()
+  this.alignSelectedElements("m", "page")
+  this.alignSelectedElements("c", "page")
+}).catch(()=>{
+  console.log('Error loading image');
+})
+
+
 this.save = function() {
   // remove the selected outline before serializing
   clearSelection();
   save_options.apply = true;
   
   // no need for doctype, see http://jwatt.org/svg/authoring/#doctype-declaration
-  var str = this.svgCanvasToString();
-  var blob = new Blob([ str ], {type: "image/svg+xml;charset=utf-8"});
-  var dropAutoBOM = true;
-  saveAs(blob, "method-draw-image.svg", dropAutoBOM);
+  var svgContent = this.svgCanvasToString();
+  // var blob = new Blob([ str ], {type: "image/svg+xml;charset=utf-8"});
+  // var dropAutoBOM = true;
+  // saveAs(blob, "method-draw-image.svg", dropAutoBOM);
+  const url = new URL(window.location);
+  const params = url.searchParams;
+  const id = params.get('id');
+  const token = localStorage.getItem('token');
+  if (id) {
+    const saveSvgAction = `/api/imageTemplate/${id}/svg`;
+    $.ajax(
+      {
+        url: saveSvgAction,
+        type: 'PUT',
+        data: {content: svgContent},
+        headers: {Authorization: `Bearer ${token}`}}
+    );
+  }
 };
+
 
 // Function: rasterExport
 // Generates a PNG Data URL based on the current image, then calls "exported" 
@@ -22436,4 +22478,18 @@ if (typeof module !== "undefined" && module.exports) {
   define([], function() {
     return saveAs;
   });
+}
+// window.addEventListener('paste', ... or
+document.onpaste = function(event){
+  var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+  for (index in items) {
+    var item = items[index];
+    if (item.kind === 'file') {
+      var blob = item.getAsFile();
+      var reader = new FileReader();
+      reader.onload = function(event){
+        console.log(event.target.result)}; // data url!
+      reader.readAsDataURL(blob);
+    }
+  }
 }
