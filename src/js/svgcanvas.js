@@ -5561,8 +5561,9 @@ const params = url.searchParams;
 const id = params.get('id');
 const token = localStorage.getItem('token');
 
-$.get(`/api/imageTemplate/${id}/svg`).then(r=>{
-  this.importSvgString('<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg"> <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ --> <g>  <title>background</title>  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>  </g> </g> <g>  <title>Layer 1</title>  <rect id="svg_1" height="77" width="400" y="57.5" x="99.5" stroke-width="1.5" stroke="#000" fill="#fff"/>  <rect id="svg_2" height="58" width="463" y="110.5" x="291.5" stroke-width="1.5" stroke="#000" fill="#fff"/>  <rect id="svg_3" height="142" width="390" y="252.45313" x="132.5" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#FFAAB8"/> </g></svg>', true);
+$.get(`/api/imageTemplate/${id}/svg`).then(svgData=>{
+  console.log(svgData);
+  this.importSvgString(svgData, true);
   this.ungroupSelectedElement()
   this.ungroupSelectedElement()
   this.groupSelectedElements()
