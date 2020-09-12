@@ -5561,7 +5561,7 @@ const params = url.searchParams;
 const id = params.get('id');
 const token = localStorage.getItem('token');
 
-$.get(`/api/imageTemplate/${id}/svg`).then(svgData=>{
+$.ajax({url: `/api/imageTemplate/${id}/svg`, dataType: 'text'}).then(svgData=>{
   console.log(svgData);
   this.importSvgString(svgData, true);
   this.ungroupSelectedElement()
